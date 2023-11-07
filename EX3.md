@@ -69,45 +69,55 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 
 ### QUERY:
+SELECT ename FROM EMP WHERE sal > (SELECT sal FROM EMP WHERE empno = 7566);
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/3d6f0550-a0bd-4487-a0f3-76da31f07f96)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
+SELECT ename,job,sal FROM EMP WHERE sal = (SELECT MIN(sal) FROM EMP);
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/47136d7f-9e02-4095-8b51-bd4f2916611c)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
+SELECT ename,job FROM EMP WHERE deptno = 10 AND job IN (SELECT job FROM EMP WHERE job
+= 'sales')
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/3e7f476f-d5ff-4392-bb32-9c57d4b7e540)
 
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
+create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10; SELECT * FROM
+empv5;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/096efadf-0847-46ad-a1f5-514db4e661eb)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
+create view empv30 AS select EMPNO,ENAME,SAL from EMP where DEPTNO=30; SELECT * FROM
+empv30;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/865cfde8-3de2-4d13-8de6-25bf465eda4a)
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
-
+create view empv6 as select EMPNO,ENAME,SAL,JOB from EMP; SELECT * FROM empv6;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/34793fcd-e69c-41a0-8d58-66d0ef98b9f1)
 
 ### Create a Customer1 Table
 ```sql
@@ -140,28 +150,39 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
+select s.name,c.cust_name,s.city from salesman1 s ,customer1 c where s.city=c.city;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/4ac21e71-e003-4cef-8bda-aa1295a80a7d)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
+select s.name,c.cust_name,c.city,s.commission from salesman1 s inner join customer1 c
+on s.city=c.city where s.commission>0.13;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/5f0f1c51-9361-46a6-8f9a-5112912dfb80)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
-
+select * from salesman1 s natural join customer1 c;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/9ec89b71-733d-4691-a507-537680c39b04)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
-
+select s.name,c.cust_name,c.city,s.commission from salesman1 s left join
+customer1 c on s.salesman_id=c.salesman_id;
+select s.name,c.cust_name,c.city,s.commission from salesman1 s right join
+customer1 c on s.salesman_id=c.salesman_id;
 
 ### OUTPUT:
+LEFT JOINT 
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/7562322b-8561-4d72-b94a-87cbab320b95)
+RIGHT JOINT 
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/118668751/e3efa220-70f4-4656-bca1-1ae6e923c3dd)
